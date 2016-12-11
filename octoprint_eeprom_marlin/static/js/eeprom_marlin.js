@@ -206,18 +206,25 @@ $(function() {
                             position: 18,
                             origValue: match[8],
                             value: match[8],
-                            description: 'Maximum XY jerk (mm/s)'
+                            description: 'Maximum X jerk (mm/s)'
+                        });
+                        self.eepromData.push({
+                            dataType: 'M205 Y',
+                            position: 19,
+                            origValue: match[8],
+                            value: match[8],
+                            description: 'Maximum Y jerk (mm/s)'
                         });
                         self.eepromData.push({
                             dataType: 'M205 Z',
-                            position: 19,
+                            position: 20,
                             origValue: match[10],
                             value: match[10],
                             description: 'Maximum Z jerk (mm/s)'
                         });
                         self.eepromData.push({
                             dataType: 'M205 E',
-                            position: 20,
+                            position: 21,
                             origValue: match[12],
                             value: match[12],
                             description: 'Maximum E jerk (mm/s)'
@@ -229,21 +236,21 @@ $(function() {
                     if (match) {
                         self.eepromData.push({
                             dataType: 'M206 X',
-                            position: 21,
+                            position: 22,
                             origValue: match[2],
                             value: match[2],
                             description: 'X Home offset (mm)'
                         });
                         self.eepromData.push({
                             dataType: 'M206 Y',
-                            position: 22,
+                            position: 23,
                             origValue: match[4],
                             value: match[4],
                             description: 'Y Home offset (mm)'
                         });
                         self.eepromData.push({
                             dataType: 'M206 Z',
-                            position: 23,
+                            position: 24,
                             origValue: match[6],
                             value: match[6],
                             description: 'Z Home offset (mm)'
@@ -255,21 +262,21 @@ $(function() {
                     if (match) {
                         self.eepromData.push({
                             dataType: 'M301 P',
-                            position: 24,
+                            position: 25,
                             origValue: match[2],
                             value: match[2],
                             description: 'PID - Proportional (Kp)'
                         });
                         self.eepromData.push({
                             dataType: 'M301 I',
-                            position: 25,
+                            position: 26,
                             origValue: match[4],
                             value: match[4],
                             description: 'PID - Integral (Ki)'
                         });
                         self.eepromData.push({
                             dataType: 'M301 D',
-                            position: 26,
+                            position: 27,
                             origValue: match[6],
                             value: match[6],
                             description: 'PID - Derivative (Kd)'
@@ -281,7 +288,7 @@ $(function() {
                     if (match) {
                         self.eepromData.push({
                             dataType: 'M851 Z',
-                            position: 27,
+                            position: 28,
                             origValue: match[2],
                             value: match[2],
                             description: 'Z-Probe Offset (mm)'
