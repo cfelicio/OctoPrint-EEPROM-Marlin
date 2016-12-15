@@ -15,9 +15,10 @@ $(function() {
         self.eepromM203RegEx = /M203 ([X])(.*)[^0-9]([Y])(.*)[^0-9]([Z])(.*)[^0-9]([E])(.*)/;
         self.eepromM201RegEx = /M201 ([X])(.*)[^0-9]([Y])(.*)[^0-9]([Z])(.*)[^0-9]([E])(.*)/;
         self.eepromM204RegEx = /M204 ([S])(.*)[^0-9]([T])(.*)/;
-        self.eepromM205RegEx = /M205 ([S])(.*)[^0-9]([T])(.*)[^0-9]([B])(.*)[^0-9]([X])(.*)[^0-9]([Z])(.*)[^0-9]([E])(.*)/;
+        self.eepromM205RegEx = /M205 ([S])(.*)[^0-9]([T])(.*)[^0-9]([B])(.*)[^0-9]([X])(.*)[^0-9]([Y])(.*)[^0-9]([Z])(.*)[^0-9]([E])(.*)/;
         self.eepromM206RegEx = /M206 ([X])(.*)[^0-9]([Y])(.*)[^0-9]([Z])(.*)/;
         self.eepromM301RegEx = /M301 ([P])(.*)[^0-9]([I])(.*)[^0-9]([D])(.*)/;
+        self.eepromM666RegEx = /M666 ([Z])(.*)/;
         self.eepromM851RegEx = /M851 ([Z])(.*)/;
 
         self.isMarlinFirmware = ko.observable(false);
@@ -211,22 +212,22 @@ $(function() {
                         self.eepromData.push({
                             dataType: 'M205 Y',
                             position: 19,
-                            origValue: match[8],
-                            value: match[8],
+                            origValue: match[10],
+                            value: match[10],
                             description: 'Maximum Y jerk (mm/s)'
                         });
                         self.eepromData.push({
                             dataType: 'M205 Z',
                             position: 20,
-                            origValue: match[10],
-                            value: match[10],
+                            origValue: match[12],
+                            value: match[12],
                             description: 'Maximum Z jerk (mm/s)'
                         });
                         self.eepromData.push({
                             dataType: 'M205 E',
                             position: 21,
-                            origValue: match[12],
-                            value: match[12],
+                            origValue: match[14],
+                            value: match[14],
                             description: 'Maximum E jerk (mm/s)'
                         });
                     }
@@ -283,12 +284,25 @@ $(function() {
                         });
                     }
 
+                    
+                    // M666 Z2 Endstop Adjustment (mm)
+                    match = self.eepromM666RegEx.exec(line);
+                    if (match) {
+                        self.eepromData.push({
+                            dataType: 'M666 Z',
+                            position: 28,
+                            origValue: match[2],
+                            value: match[2],
+                            description: 'Z2 Endstop Adjustment (mm)'
+                        });
+                    }
+                    
                     // M851 Z-Probe Offset
                     match = self.eepromM851RegEx.exec(line);
                     if (match) {
                         self.eepromData.push({
                             dataType: 'M851 Z',
-                            position: 28,
+                            position: 29,
                             origValue: match[2],
                             value: match[2],
                             description: 'Z-Probe Offset (mm)'
